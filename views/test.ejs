@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <nav>
+          <div class="nav01">
+            <img src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" />
+          </div>
+          <div class="nav02">
+            <div class="nav02img">
+              <img src="../Img/location.png" alt="" srcset="" />
+            </div>
+            <div class="nav02text">
+              <span>Deliver To</span><br />
+              <span>India</span>
+            </div>
+          </div>
+          <div class="nav03">
+            <button>
+              All
+              <img src="../public/Img/downward-arrow.png" alt="" srcset="" />
+            </button>
+            <input type="text" placeholder="Search Amazon" />
+            <button><img src="../Img/search.png" alt="" srcset="" /></button>
+          </div>
+          <div class="nav04">
+            <img src="../Img/Flag_of_the_United_States.png" alt="" srcset="" />
+            EN
+          </div>
+          <div class="nav05">
+            <span>Account & Lists</span>
+          </div>
+          <div class="nav06">
+            <span
+              >Returns <br />
+              & Order</span
+            >
+          </div>
+          <div class="nav07">Cart</div>
+        </nav>
+      </header>
+      <div class="subHeader">
+        <ul>
+          <li>All</li>
+          <li>Today's Deals</li>
+          <li>Customer Service</li>
+          <li>Dhruv's Amazon.com</li>
+          <li>Buy Again</li>
+          <li>Sell</li>
+          <li>Gift Cards</li>
+          <li>Browsing History</li>
+          <li>Registry</li>
+        </ul>
+      </div>
+      <main>
+        <div class="mainImg">
+          <div class="ListingImage">
+                <% doc2.forEach((value) => { %>
+                  <% value.imgPaths.forEach((imgPath) => { %>
+                <img src="<%= imgPath %>" alt="" srcset="" />
+                <% });%>
+              <% });%>
+              </div>
+          <div class="mainBigImage image-container" id="image-container">
+            <% doc2.forEach((value) => { %>
+              <img src="<%= value.imgPaths[0] %>" alt="" srcset="">
+          <% });%>
+              <div id="mouse-overlay"></div>
+              <div id="overlay"></div>
+            </div>
+        </div>
+        <% doc.forEach((value) => {%>
+        <div class="mainContent">
+          <div class="Content">
+            <div class="AmazonHeading">
+              <h1 id="AmazonTitle">
+                <%= value.title %>
+              </h1>
+              <a href="#">Visit the Atlantic Naturals Store</a>
+              <div class="ratingDiv">
+                <div class="stars">
+                  <div class="starNumber">4</div>
+                  <div class="starImage">
+                    <img src="../Img/rating.png" alt="" srcset="" />
+                    <img src="../Img/down.png" alt="" srcset="" />
+                  </div>
+                </div>
+                <div class="rating">
+                  <a href="#">851 ratings</a>
+                </div>
+                <span>|</span>
+                <div class="searchPage">
+                  <a href="#">Search this page</a>
+                </div>
+              </div>
+              <hr width="90%" />
+              <h3 id="Price"><%= value.price %></h3>
+            </div>
+            <div class="brandDetail">
+              <div>
+                <h2>
+                  This item cannot be shipped to your selected delivery location.
+                  Please choose a different delivery location.
+                </h2>
+              </div>
+              <div>
+                <table>
+                  <tr>
+                    <td><b>Brand</b></td>
+                    <td id="detail01"><%= value.brandName %></td>
+                  </tr>
+                  <tr>
+                    <td><b>Item Form</b></td>
+                    <td id="detail02"><%= value.itemForm %></td>
+                  </tr>
+                  <tr>
+                    <td><b>Manufacturer</b></td>
+                    <td id="detail03"><%= value.manufacture %></td>
+                  </tr>
+                  <tr>
+                    <td><b>Item Package Quantity</b></td>
+                    <td id="detail04"><%= value.quantity %></td>
+                  </tr>
+                  <tr>
+                    <td><b>Package Information</b></td>
+                    <td id="detail05"><%= value.PackageInfo %></td>
+                  </tr>
+                </table>
+              </div>
+              <hr width="90%" />
+            </div>
+            <div id="BulletPoints">
+              <ul>
+                <h2>About this item</h2>
+                <li id="AmazonSubTitle01">
+                  <%= value.bulletPoint01 %>
+                </li>
+                <li id="AmazonSubTitle02"><%= value.bulletPoint02 %></li>
+                <li id="AmazonSubTitle03"><%= value.bulletPoint03 %></li>
+                <li id="AmazonSubTitle04"><%= value.bulletPoint04 %></li>
+                <li id="AmazonSubTitle05"><%= value.bulletPoint05 %></li>
+                <li id="AmazonSubTitle06"><%= value.bulletPoint06 %></li>
+              </ul>
+            </div>
+          </div>
+          <% });%>
+          <div class="div" style="width: 40%"></div>    
+        </div>
+      </main>
+      <div class="AplusImage"></div>
+
+      <div class="randomBox" 
+      style="
+      background-color: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      ">
+<form method="post" action="/post" class="randomInnerBox">
+  <input type="text" name="login" id="">
+  <input type="text" name="login2" id="">
+  <button type="submit">Button</button>
+</form>
+</div>
+<script>
+  const input = document.querySelector("#AmazonTitle");
+  if(input.value !== ""){
+    document.querySelector(".randomBox").style.display = "none";
+  }
+</script>
+</body>
+</html>
