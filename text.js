@@ -15,7 +15,6 @@ app.use(session({
   secret: 'WorkinXdigital',
   resave: false,
   saveUninitialized: true,
-  store: new session.MemoryStore(), // Use a session store
   cookie: { secure: true }
 }));
 
