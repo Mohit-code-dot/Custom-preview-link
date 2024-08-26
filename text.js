@@ -25,7 +25,9 @@ app.get("/", async (req, res) => {
   const login2 = req.session.login2;
   try {
     const uri = "mongodb+srv://WorkinX:JoPlgIK8JUpjMeuY@cluster0.qm9dld0.mongodb.net";
-    const client = new MongoClient(uri);
+    const client = new MongoClient(uri, {
+      tls: true
+    });
     const dbName = "WorkinX";
     const collectionName = "brandstores";
     const collectionName2 = "images";
