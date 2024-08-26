@@ -13,11 +13,6 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
 
-const store = new MongoDBStore({
-  uri: "mongodb+srv://WorkinX:JoPlgIK8JUpjMeuY@cluster0.qm9dld0.mongodb.net/WorkinX",
-  collection: 'sessions'
-});
-
 app.use(session({
   secret: 'WorkinXdigital',
   resave: false,
