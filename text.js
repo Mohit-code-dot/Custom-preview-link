@@ -17,7 +17,7 @@ app.use(session({
   secret: 'WorkinXdigital',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: true } 
 }));
 
 app.get("/", async (req, res) => {
