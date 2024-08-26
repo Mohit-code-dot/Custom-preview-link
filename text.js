@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require('express-session');
-const { MongoClient } = require("mongodb");
 const path = require("path");
 const app = express();
 const Port = 4200;
@@ -12,7 +11,6 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public")));
 
-
 app.use(session({
   secret: 'WorkinXdigital',
   resave: false,
@@ -20,40 +18,39 @@ app.use(session({
   cookie: { secure: true }
 }));
 
+// Connect to MongoDB using Mongoose
+const uri = "mongodb+srv://WorkinX:JoPlgIK8JUpjMeuY@cluster0.qm9dld0.mongodb.net/WorkinX?retryWrites=true&w=majority";
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tlsAllowInvalidCertificates: true // Disable certificate validation (dev only)
+})
+.then(() => console.log("Connected to MongoDB"))
+.catch(err => console.error("MongoDB connection error:", err));
+
+const brandstoreSchema = new mongoose.Schema({}, { collection: 'brandstores' });
+const imageSchema = new mongoose.Schema({}, { collection: 'images' });
+const Brandstore = mongoose.model('Brandstore', brandstoreSchema);
+const Image = mongoose.model('Image', imageSchema);
+
 app.get("/", async (req, res) => {
   const login = req.session.login;
   const login2 = req.session.login2;
   try {
-    const uri = "mongodb+srv://WorkinX:JoPlgIK8JUpjMeuY@cluster0.qm9dld0.mongodb.net/WorkinX";
-    const client = new MongoClient(uri, {
-      tls: true,
-      tlsAllowInvalidCertificates: true,
-    });
-    const dbName = "WorkinX";
-    const collectionName = "brandstores";
-    const collectionName2 = "images";
-    await client.connect();
-    console.log("Connected to MongoDB");
-
-    const db = client.db(dbName);
-    const collectionDB = db.collection(collectionName);
-    const collectionDB2 = db.collection(collectionName2);
     const idToFind = login;
     const idToFind2 = login2;
+
     console.log(idToFind);
     console.log(idToFind2);
-    const filter = { _id: new mongoose.Types.ObjectId(idToFind) };
-    const filter2 = { _id: new mongoose.Types.ObjectId(idToFind2) };
-    const doc = await collectionDB.find(filter).toArray();
-    const doc2 = await collectionDB2.find(filter2).toArray();
+
+    const doc = await Brandstore.find({ _id: new mongoose.Types.ObjectId(idToFind) }).lean();
+    const doc2 = await Image.find({ _id: new mongoose.Types.ObjectId(idToFind2) }).lean();
 
     if (doc && doc2) {
       res.render("test", { doc, doc2 });
     } else {
       res.send({ match: false });
     }
-
-    await client.close();
   } catch (err) {
     console.error(err);
     res.status(500).send({ error: "Internal Server Error" });
