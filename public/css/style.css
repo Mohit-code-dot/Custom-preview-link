@@ -524,3 +524,10 @@
     width: 140px;
     padding: 5px;
   }
+  .AplusImage{
+    margin-top: 1rem;
+  }
+  .AplusImage img{
+    width: 100%;
+    margin-top: -5px;
+  }

@@ -28,9 +28,8 @@ app.get("/", async (req, res) => {
     await client.connect();
     console.log("Connected to MongoDB");
     const db = client.db(dbName);
-    const collectionDB = db.collection(collectionName);
+    const collectionDB = db.collection(collectionName); 
     const idToFind = login;
-    console.log(idToFind); 
     const filter = { _id: new ObjectId(idToFind) };
     const doc = await collectionDB.find(filter).toArray();
 
