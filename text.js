@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public"))); // Update static file path
-
+ 
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -17,11 +17,10 @@ app.use(session({
   // Remove or set to false for development
   // cookie: { secure: true }
 }));
-
+ 
 app.get("/", async (req, res) => {
   const login = req.session.login;
-  const login2 = req.session.login2;
-  try {
+  try { 
     const uri = "mongodb+srv://user01:user01@cluster0.qm9dld0.mongodb.net";
     const client = new MongoClient(uri);
     const dbName = "WorkinX"; 
@@ -31,17 +30,13 @@ app.get("/", async (req, res) => {
     const db = client.db(dbName);
     const collectionDB = db.collection(collectionName);
     const idToFind = login;
-    const idToFind2 = login2;
-    console.log(idToFind);
-    console.log(idToFind2);
+    console.log(idToFind); 
     const filter = { _id: new ObjectId(idToFind) };
-    const filter2 = { _id: new ObjectId(idToFind2) };
     const doc = await collectionDB.find(filter).toArray();
-    const doc2 = await collectionDB.find(filter2).toArray();
 
-    if (doc && doc2) {
-      res.render("test", { doc, doc2 });
-    } else {
+    if (doc) {
+      res.render("test", { doc });
+    } else { 
       res.send({ match: false }); 
     }
 
@@ -54,7 +49,6 @@ app.get("/", async (req, res) => {
 
 app.post("/post", (req, res) => {
   req.session.login = req.body.login;
-  req.session.login2 = req.body.login2;
   res.redirect('/');
 });
 
