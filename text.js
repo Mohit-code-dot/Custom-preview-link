@@ -33,7 +33,7 @@ app.get("/", async (req, res) => {
     const filter = { _id: new ObjectId(idToFind) };
     const doc = await collectionDB.find(filter).toArray();
 
-    if (doc) {
+    if (doc) { 
       res.render("test", { doc });
     } else { 
       res.send({ match: false }); 
