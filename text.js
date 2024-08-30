@@ -14,8 +14,6 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
-  // Remove or set to false for development
-  // cookie: { secure: true }
 }));
  
 app.get("/", async (req, res) => {
