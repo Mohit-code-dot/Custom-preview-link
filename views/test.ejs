@@ -63,13 +63,11 @@
         <% doc.forEach((value) => {%>
         <div class="ListingImage">
           <% value.imgPaths.forEach((value)=> {%>
-          <img src="<%= value %>" alt="" srcset="" />
+          <img id="SmallListingImage" src="<%= value %>" alt="" srcset="" />
           <% });%>
         </div>
-        <div class="mainBigImage image-container" id="image-container">
+        <div class="mainBigImage">
           <img src="<%= value.imgPaths[0] %>" alt="" srcset="" />
-          <div id="mouse-overlay"></div>
-          <div id="overlay"></div>
         </div>
       </div>
       <div class="mainContent">
@@ -191,6 +189,14 @@
       if (input.value !== "") {
         document.querySelector(".randomBox").style.display = "none";
       }
-    </script>
+
+      const SmallListingImage = document.querySelectorAll("#SmallListingImage");
+      const mainBigImage = document.querySelector(".mainBigImage img")
+      SmallListingImage.forEach((value)=>{
+        value.addEventListener("mouseover",()=>{
+          mainBigImage.src = value.src;
+        })
+      })
+  </script>
   </body>
 </html>

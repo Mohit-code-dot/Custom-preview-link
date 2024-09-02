@@ -15,7 +15,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
- 
+  
 app.get("/", async (req, res) => {
   const login = req.session.login;
   try { 
@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
     const client = new MongoClient(uri);
     const dbName = "WorkinX"; 
     const collectionName = "brandstores";
-    await client.connect();
+    await client.connect(); 
     console.log("Connected to MongoDB");
     const db = client.db(dbName);
     const collectionDB = db.collection(collectionName); 
